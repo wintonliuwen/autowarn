@@ -43,7 +43,6 @@ int load_conf(char *filename)
 		}
 		
 		newpitem = newitem(json_string_value(name), json_string_value(restart));
-		printf("process %d name: %s, restartcmd:%s\n", i+1, json_string_value(name), json_string_value(restart));
 		options = json_object_get(process, "options");
 		if (!json_is_array(options))
 		{
@@ -67,7 +66,6 @@ int load_conf(char *filename)
 				return -1;
 			}
 			coption = newoption(json_string_value(opname), json_string_value(chkcmd), (int)json_integer_value(level), json_string_value(warnmsg));
-			printf("option %d name:%s, chkcmd:%s, level:%d warnmsg:%s\n", j+1, json_string_value(opname), json_string_value(chkcmd),(int)json_integer_value(level),  json_string_value(warnmsg));
 			addoption(newpitem->optlist, coption);
 		}
 		additem(pList, newpitem);

@@ -50,8 +50,10 @@ void initPitems(void)
 pItem* newitem(char *name, char *restartcmd)
 {
 	pItem *newitem = (pItem *)malloc(sizeof(pItem));
-	newitem->pname = name;
-	newitem->restartcmd = restartcmd;
+	newitem->pname = malloc(strlen(name) +1);
+	strncpy(newitem->pname, name, strlen(name) + 1);
+	newitem->restartcmd = malloc(strlen(restartcmd) + 1);
+	strncpy(newitem->restartcmd, restartcmd, strlen(restartcmd) + 1);
 	newitem->optlist = (ckoption *)malloc(sizeof(ckoption));
 	newitem->next = NULL;
 	return newitem;
