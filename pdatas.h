@@ -28,11 +28,14 @@ pItem *pList;
 void initPitems(void);
 void additem(pItem *list, pItem *newitem);
 void clearItem(pItem *list);
+void printoption(ckoption *option);
+void printoptions(ckoption *oplist);
 
 void initoptions(void);
 void addoption(ckoption *list, ckoption *newoption);
 void clearoption(ckoption *list);
 int load_conf(char *filename);
+void printitem(pItem *item);
 
 #endif
 

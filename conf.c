@@ -43,6 +43,7 @@ int load_conf(char *filename)
 		}
 		
 		newpitem = newitem(json_string_value(name), json_string_value(restart));
+
 		options = json_object_get(process, "options");
 		if (!json_is_array(options))
 		{
