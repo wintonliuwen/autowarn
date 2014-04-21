@@ -39,6 +39,7 @@ int checkoptions(ckoption *oplist)
 	char chkcmd[64] = {0};
 	char warnmsg[256] = {0};
 	ckoption *cur;
+
 	if (oplist->optname == NULL)
 	{
 		cur = oplist->next;
@@ -48,12 +49,13 @@ int checkoptions(ckoption *oplist)
 		cur = oplist;
 	}
 
-	while (cur->next != NULL)
+	do
 	{
 		lev = cur->lev;
 		strncpy(opname, cur->optname, strlen(cur->optname) +1);
 		strncpy(chkcmd, cur->chk, strlen(cur->chk) +1);
 		strncpy(warnmsg, cur->warnmsg, strlen(cur->warnmsg) +1);
+
 		if (checkcmd(chkcmd) == WORKOFF)
 		{
 			if (lev == WARNRESTART)
@@ -65,8 +67,18 @@ int checkoptions(ckoption *oplist)
 				warn(warnmsg);
 			}
 		}
-		cur = cur->next;
+
+		if (cur->next != NULL)
+		{
+			cur = cur->next;
+		}
+		else
+		{
+			break;
+		}
 	}
+	while (cur->next != NULL);
+
 	return ret;
 }
 
@@ -75,7 +87,6 @@ void checkloop(pItem *itemlist)
 	char restartcmd[64] = {0};
 	int ret = 0;
 	pItem *cur;
-	printf("entering chekloop\n");
 	if (itemlist->pname == NULL)
 	{
 		cur = itemlist->next;
@@ -84,17 +95,23 @@ void checkloop(pItem *itemlist)
 	{
 		cur = itemlist;
 	}
-	while (cur->next != NULL)
+
+	do
 	{
 		strncpy(restartcmd, cur->restartcmd, strlen(cur->restartcmd) +1);
-		ret = checkoptions(cur->optlist->next);
+		ret = checkoptions(cur->optlist);
+
 		if (ret > 0)
 		{
 			printf("Restarting process %s\n", cur->pname);
 			system(restartcmd);
 		}
-		cur = cur->next;
+		if (cur->next != NULL)
+			cur = cur->next;
+		else
+			break;
 	}
+	while(cur->next != NULL);
 }
 
 void processloop(void)

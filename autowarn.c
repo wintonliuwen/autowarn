@@ -7,7 +7,7 @@
 #include "defines.h"
 
 char confpath[MAXPATH] = CONFILE;
-int interval = 0;
+int interval = CHECK_INTERVAL;
 
 static void printversion(void)
 {
