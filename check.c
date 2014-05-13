@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
-#include <curses.h>
 #include "pdatas.h"
 #include "defines.h"
 
@@ -116,7 +115,7 @@ void checkloop(pItem *itemlist)
 
 void processloop(void)
 {
-	while(TRUE)
+	while(1)
 	{
 		checkloop(pList);
 		sleep(interval*60);
