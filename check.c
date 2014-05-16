@@ -4,6 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include "pdatas.h"
+#include "log.h"
 #include "defines.h"
 
 extern int interval;
@@ -27,7 +28,12 @@ int checkcmd(char *cmd)
 
 void warn(char *msg)
 {
-	printf("%s\n", msg);
+	logmsg(msg);
+}
+
+void errmsg(char *msg)
+{
+	logerr(msg);
 }
 
 int checkoptions(ckoption *oplist)
@@ -60,6 +66,7 @@ int checkoptions(ckoption *oplist)
 			if (lev == WARNRESTART)
 			{
 				ret += 1;
+				errmsg(warnmsg);
 			}
 			else if (lev == WARNCHK)
 			{

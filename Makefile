@@ -2,7 +2,7 @@ CC = gcc
 
 all:autowarn
 
-autowarn: autowarn.o conf.o pdatas.o check.o
+autowarn: autowarn.o conf.o pdatas.o check.o log.o
 	$(CC) -g $^ -ljansson -o $@
 
 clean:
